@@ -116,7 +116,6 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """ Create an object of any class"""
         argslist = args.split()
-        print(argslist[0])
         if not args:
             print("** class name missing **")
             return
@@ -128,7 +127,6 @@ class HBNBCommand(cmd.Cmd):
         for i in attrlist:
             i = i.replace('"', '')
             key, value = i.split("=")
-            print(key)
             value = value.replace("_", ' ')
             try:
                 actual_val = eval(value)
