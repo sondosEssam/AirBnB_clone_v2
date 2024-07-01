@@ -125,14 +125,13 @@ class HBNBCommand(cmd.Cmd):
         attrlist = argslist[1:]
         newattrs = {}
         for i in attrlist:
-            i = i.replace('"', '')
             key, value = i.split("=")
             value = value.replace("_", ' ')
             try:
                 actual_val = eval(value)
+                newattrs.update({key: actual_val})
             except (NameError, SyntaxError):
                 continue
-            newattrs[key] = actual_val
         if newattrs:
             new_instance = eval(argslist[0])(**newattrs)
         else:
@@ -202,7 +201,7 @@ class HBNBCommand(cmd.Cmd):
         key = c_name + "." + c_id
 
         try:
-            del(storage.all()[key])
+            del (storage.all()[key])
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -279,7 +278,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         # first determine if kwargs or args
-        if '{' in args[2] and '}' in args[2] and type(eval(args[2])) is dict:
+        if '{' in args[2] and '}' in args[2] and type(eval(args[2])) == dict:
             kwargs = eval(args[2])
             args = []  # reformat kwargs into list, ex: [<name>, <value>, ...]
             for k, v in kwargs.items():
@@ -334,6 +333,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
